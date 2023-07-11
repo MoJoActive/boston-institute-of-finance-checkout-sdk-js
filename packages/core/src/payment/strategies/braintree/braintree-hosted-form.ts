@@ -198,6 +198,11 @@ export default class BraintreeHostedForm {
                         placeholder: fields.cardCode.placeholder,
                         internalLabel: fields.cardCode.accessibilityLabel,
                     },
+                    postalCode: fields.cardPostalCode && {
+                        container: `#${fields.cardPostalCode.containerId}`,
+                        placeholder: fields.cardPostalCode.placeholder,
+                        internalLabel: fields.cardPostalCode.accessibilityLabel,
+                    },
                 },
                 isNil,
             );
@@ -454,7 +459,10 @@ export default class BraintreeHostedForm {
         this._formOptions?.onCardTypeChange?.({
             cardType:
                 event.cards.length === 1
-                    ? event.cards[0].type.replace(/^master\-card$/, 'mastercard',) /* eslint-disable-line */
+                    ? event.cards[0].type.replace(
+                          /^master\-card$/,
+                          'mastercard',
+                      ) /* eslint-disable-line */
                     : undefined,
         });
     };

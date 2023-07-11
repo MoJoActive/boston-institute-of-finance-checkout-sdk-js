@@ -137,6 +137,7 @@ export enum BraintreeFormFieldType {
     CardName = 'cardName',
     CardNumber = 'cardNumber',
     CardNumberVerification = 'cardNumberVerification',
+    CardPostalCode = 'cardPostalCode',
 }
 
 export interface BraintreeFormFieldsMap {
@@ -144,6 +145,7 @@ export interface BraintreeFormFieldsMap {
     [BraintreeFormFieldType.CardExpiry]: BraintreeFormFieldOptions;
     [BraintreeFormFieldType.CardName]: BraintreeFormFieldOptions;
     [BraintreeFormFieldType.CardNumber]: BraintreeFormFieldOptions;
+    [BraintreeFormFieldType.CardPostalCode]?: BraintreeFormFieldOptions;
 }
 
 export interface BraintreeStoredCardFieldsMap {

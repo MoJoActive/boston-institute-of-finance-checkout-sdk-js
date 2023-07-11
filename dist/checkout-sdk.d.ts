@@ -1585,7 +1585,8 @@ declare enum BraintreeFormFieldType {
     CardExpiry = "cardExpiry",
     CardName = "cardName",
     CardNumber = "cardNumber",
-    CardNumberVerification = "cardNumberVerification"
+    CardNumberVerification = "cardNumberVerification",
+    CardPostalCode = "cardPostalCode"
 }
 
 declare interface BraintreeFormFieldValidateErrorData {
@@ -1611,6 +1612,7 @@ declare interface BraintreeFormFieldsMap {
     [BraintreeFormFieldType.CardExpiry]: BraintreeFormFieldOptions;
     [BraintreeFormFieldType.CardName]: BraintreeFormFieldOptions;
     [BraintreeFormFieldType.CardNumber]: BraintreeFormFieldOptions;
+    [BraintreeFormFieldType.CardPostalCode]?: BraintreeFormFieldOptions;
 }
 
 declare interface BraintreeFormOptions {

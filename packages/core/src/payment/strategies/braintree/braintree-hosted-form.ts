@@ -36,6 +36,7 @@ enum BraintreeHostedFormType {
 export default class BraintreeHostedForm {
     private _cardFields?: BraintreeHostedFields;
     private _cardNameField?: BraintreeRegularField;
+    private _cardPostalField?: BraintreeRegularField;
     private _formOptions?: BraintreeFormOptions;
     private _type?: BraintreeHostedFormType;
     private _isInitializedHostedForm = false;
@@ -76,6 +77,16 @@ export default class BraintreeHostedForm {
             this._cardNameField.on('blur', this._handleNameBlur);
             this._cardNameField.on('focus', this._handleNameFocus);
             this._cardNameField.attach();
+
+            if (options.fields.cardPostalCode) {
+                this._cardPostalField = new BraintreeRegularField(
+                    options.fields.cardPostalCode,
+                    options.styles,
+                );
+                this._cardPostalField.on('blur', this._handlePostalCodeBlur);
+                this._cardPostalField.on('focus', this._handlePostalCodeFocus);
+                this._cardPostalField.attach();
+            }
         }
 
         this._isInitializedHostedForm = true;
@@ -90,6 +101,7 @@ export default class BraintreeHostedForm {
 
         await this._cardFields?.teardown();
         this._cardNameField?.detach();
+        this._cardPostalField?.detach();
     }
 
     async tokenize(billingAddress: Address): Promise<NonceInstrument> {
@@ -103,6 +115,7 @@ export default class BraintreeHostedForm {
                     {
                         billingAddress: billingAddress && this._mapBillingAddress(billingAddress),
                         cardholderName: this._cardNameField?.getValue(),
+                        postalCode: this._cardPostalField?.getValue(),
                     },
                     isNil,
                 ),
@@ -140,6 +153,7 @@ export default class BraintreeHostedForm {
                 omitBy(
                     {
                         cardholderName: this._cardNameField?.getValue(),
+                        postalCode: this._cardPostalField?.getValue(),
                     },
                     isNil,
                 ),
@@ -373,6 +387,13 @@ export default class BraintreeHostedForm {
                     type: 'required',
                 };
 
+            case BraintreeFormFieldType.CardPostalCode:
+                return {
+                    fieldType,
+                    message: 'Postal code is required',
+                    type: 'required',
+                };
+
             default:
                 return {
                     fieldType,
@@ -443,6 +464,12 @@ export default class BraintreeHostedForm {
         });
     };
 
+    private _handlePostalCodeBlur: () => void = () => {
+        this._formOptions?.onBlur?.({
+            fieldType: BraintreeFormFieldType.CardPostalCode,
+        });
+    };
+
     private _handleFocus: (event: BraintreeHostedFieldsState) => void = (event) => {
         this._formOptions?.onFocus?.({
             fieldType: this._mapFieldType(event.emittedBy),
@@ -452,6 +479,12 @@ export default class BraintreeHostedForm {
     private _handleNameFocus: () => void = () => {
         this._formOptions?.onFocus?.({
             fieldType: BraintreeFormFieldType.CardName,
+        });
+    };
+
+    private _handlePostalCodeFocus: () => void = () => {
+        this._formOptions?.onFocus?.({
+            fieldType: BraintreeFormFieldType.CardPostalCode,
         });
     };
 

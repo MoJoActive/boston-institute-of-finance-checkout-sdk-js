@@ -192,6 +192,7 @@ export interface BraintreeRequestData {
                 streetAddress: string;
             };
             cardholderName: string;
+            postalCode?: string;
             cvv?: string;
             expirationDate: string;
             number: string;

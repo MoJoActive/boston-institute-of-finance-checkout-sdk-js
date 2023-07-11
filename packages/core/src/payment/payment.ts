@@ -64,6 +64,7 @@ export interface CreditCardInstrument {
     ccName: string;
     ccNumber: string;
     ccCvv?: string;
+    postalCode?: string;
     shouldSaveInstrument?: boolean;
     shouldSetAsDefaultInstrument?: boolean;
     extraData?: any;

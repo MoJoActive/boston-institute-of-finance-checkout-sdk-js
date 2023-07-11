@@ -263,6 +263,7 @@ export default class BraintreePaymentProcessor {
                     cardholderName: creditCard.ccName,
                     number: creditCard.ccNumber,
                     cvv: creditCard.ccCvv,
+                    postalCode: creditCard.postalCode,
                     expirationDate: `${creditCard.ccExpiry.month}/${creditCard.ccExpiry.year}`,
                     options: {
                         validate: false,

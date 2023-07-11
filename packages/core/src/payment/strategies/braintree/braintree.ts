@@ -177,6 +177,7 @@ export interface BraintreeRequestData {
             cvv?: string;
             expirationDate: string;
             number: string;
+            postalCode?: string;
             options: {
                 validate: boolean;
             };

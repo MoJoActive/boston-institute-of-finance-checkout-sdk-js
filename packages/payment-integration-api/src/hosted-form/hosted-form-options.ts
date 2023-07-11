@@ -33,6 +33,7 @@ export interface HostedCardFieldOptionsMap {
     [HostedFieldType.CardExpiry]: HostedCardFieldOptions;
     [HostedFieldType.CardName]: HostedCardFieldOptions;
     [HostedFieldType.CardNumber]: HostedCardFieldOptions;
+    [HostedFieldType.CardPostalCode]?: HostedCardFieldOptions;
 }
 
 export interface HostedStoredCardFieldOptionsMap {

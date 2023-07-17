@@ -195,6 +195,8 @@ export default class BraintreeHostedForm {
         fields: BraintreeFormFieldsMap | BraintreeStoredCardFieldsMap,
     ): BraintreeHostedFieldsCreatorConfig['fields'] {
         if (isBraintreeFormFieldsMap(fields)) {
+            console.log(fields)
+            
             return omitBy(
                 {
                     number: {

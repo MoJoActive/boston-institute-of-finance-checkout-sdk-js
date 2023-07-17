@@ -73,7 +73,7 @@
     "reselect": "^4.1.7",
     "rxjs": "^6.6.7",
     "shallowequal": "^1.1.0",
-    "tslib": "^1.10.0",
+    "tslib": "^2.6.0",
     "yup": "^1.1.1"
   },
   "devDependencies": {
@@ -120,7 +120,7 @@
     "typedoc": "^0.22.0",
     "typedoc-plugin-markdown": "^3.11.0",
     "typescript": "^4.1.2",
-    "webpack": "^5.72.0",
+    "webpack": "^5.88.1",
     "webpack-assets-manifest": "^5.1.0",
     "webpack-bundle-analyzer": "^4.5.0",
     "webpack-cli": "^4.9.2",
@@ -130,5 +130,8 @@
     "scripts": {
       "prebump": "./scripts/standard-version/prebump.js"
     }
+  },
+  "volta": {
+    "node": "16.20.1"
   }
 }

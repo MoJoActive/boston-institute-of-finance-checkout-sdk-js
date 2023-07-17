@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-escape */
+/* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
 import { Dictionary, isEmpty, isNil, omitBy } from 'lodash';
 
 import { Address } from '../../../address';
@@ -128,7 +130,7 @@ export default class BraintreeHostedForm {
 
             return { nonce };
         } catch (error) {
-            const errors = this._mapTokenizeError(error);
+            const errors = this._mapTokenizeError(error as any);
 
             if (errors) {
                 this._formOptions?.onValidate?.({
@@ -166,7 +168,7 @@ export default class BraintreeHostedForm {
 
             return { nonce };
         } catch (error) {
-            const errors = this._mapTokenizeError(error, true);
+            const errors = this._mapTokenizeError(error as any, true);
 
             if (errors) {
                 this._formOptions?.onValidate?.({
@@ -195,8 +197,6 @@ export default class BraintreeHostedForm {
         fields: BraintreeFormFieldsMap | BraintreeStoredCardFieldsMap,
     ): BraintreeHostedFieldsCreatorConfig['fields'] {
         if (isBraintreeFormFieldsMap(fields)) {
-            console.log(fields)
-            
             return omitBy(
                 {
                     number: {
@@ -269,6 +269,9 @@ export default class BraintreeHostedForm {
 
             case 'expirationDate':
                 return BraintreeFormFieldType.CardExpiry;
+
+            case 'postalCode':
+                return BraintreeFormFieldType.CardPostalCode;
 
             case 'cvv':
                 return this._type === BraintreeHostedFormType.StoredCardVerification
@@ -527,6 +530,7 @@ export default class BraintreeHostedForm {
             case 'postalCode':
             case 'cardholderName':
             case 'cardType':
+            case 'cardPostalCode':
                 return true;
 
             default:
